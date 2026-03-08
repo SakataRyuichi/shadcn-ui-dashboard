@@ -1,0 +1,68 @@
+---
+description: Bulletproof React アーキテクチャに基づくプロジェクト構成・コーディングルール
+alwaysApply: true
+---
+
+# Bulletproof React 構成ルール
+
+このプロジェクトは [Bulletproof React](https://github.com/alan2207/bulletproof-react) のアーキテクチャ原則を参照し、スケーラブルで保守しやすい React アプリケーションを構築します。
+
+## 参照リポジトリ
+
+- **URL**: https://github.com/alan2207/bulletproof-react
+- **概要**: 本番環境向け React アプリケーションのためのシンプルでスケーラブルなアーキテクチャガイド
+
+## プロジェクト構造
+
+```
+src/
+├── app/              # アプリケーション層（Next.js App Router）
+├── assets/           # 静的ファイル（画像、フォント等）
+├── components/       # アプリ全体で共有するコンポーネント
+├── config/           # グローバル設定、環境変数
+├── features/         # 機能別モジュール（フィーチャーベース）
+├── hooks/            # 共有フック
+├── lib/              # アプリ用に事前設定された再利用ライブラリ
+├── stores/           # グローバル状態ストア
+├── types/            # 共有型定義
+└── utils/            # 共有ユーティリティ関数
+```
+
+## フィーチャー構造
+
+各フィーチャーは独立したフォルダに配置。必要なフォルダのみ作成する。
+
+```
+src/features/awesome-feature/
+├── api/         # フィーチャー固有の API リクエスト・フック
+├── assets/      # フィーチャー固有の静的ファイル
+├── components/  # フィーチャー固有のコンポーネント
+├── hooks/       # フィーチャー固有のフック
+├── stores/      # フィーチャー固有の状態
+├── types/       # フィーチャー内で使用する型
+└── utils/       # フィーチャー固有のユーティリティ
+```
+
+## 原則
+
+1. **単方向フロー**: shared → features → app（共有 → フィーチャー → アプリ）
+2. **フィーチャー間のインポート禁止**: フィーチャー同士は直接インポートしない。アプリ層で組み合わせる
+3. **絶対パス**: `@/*` エイリアスを使用（`@/components/...`）
+4. **バレルファイルは避ける**: 直接インポートで tree-shaking を維持
+
+## コンポーネントのベストプラクティス
+
+- **コロケーション**: 使用箇所の近くに配置
+- **大きなコンポーネントを避ける**: ネストした render 関数ではなく、別コンポーネントに抽出
+- **props の数を制限**: 多すぎる場合は分割または composition（children/slots）を検討
+- **一貫性**: 命名規則・スタイルを統一
+
+## ドキュメント参照
+
+詳細は以下を参照:
+
+- [Project Structure](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md)
+- [Project Standards](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-standards.md)
+- [Components And Styling](https://github.com/alan2207/bulletproof-react/blob/master/docs/components-and-styling.md)
+- [API Layer](https://github.com/alan2207/bulletproof-react/blob/master/docs/api-layer.md)
+- [State Management](https://github.com/alan2207/bulletproof-react/blob/master/docs/state-management.md)
