@@ -26,6 +26,8 @@
 ### 開発ツール
 - **Biome** - リンター・フォーマッター
 - **TSDoc** - ドキュメントコメント
+- **Storybook** - UI コンポーネントのカタログ・開発
+- **Vitest** - ユニットテスト・関数テスト
 
 ## セットアップ
 
@@ -66,6 +68,14 @@ pnpm dev
 
 ブラウザで http://localhost:3333 を開く
 
+### 5. Storybook（オプション）
+
+```bash
+pnpm storybook
+```
+
+ブラウザで http://localhost:6006 を開き、UI コンポーネントを確認できます。
+
 ---
 
 ## 開発コマンド
@@ -75,6 +85,10 @@ pnpm dev
 | `pnpm dev` | 開発サーバー起動 |
 | `pnpm build` | 本番ビルド |
 | `pnpm start` | 本番サーバー起動 |
+| `pnpm storybook` | Storybook 起動 |
+| `pnpm build-storybook` | Storybook 静的ビルド |
+| `pnpm test` | Vitest ユニットテスト（watch モード） |
+| `pnpm test:run` | Vitest ユニットテスト（1 回実行） |
 | `pnpm lint` | リント実行 |
 | `pnpm lint:fix` | リント + 自動修正 |
 | `pnpm format` | フォーマット実行 |

@@ -7,3 +7,4 @@
 | ドキュメント | 説明 |
 |-------------|------|
 | [Refero MCP 使い方ガイド](./refero-mcp.md) | Refero MCP のインストール、ツール一覧、使用例 |
+| [サイドメニュー要件](./requirements/sidebar-menu.md) | サイドメニューの構成・機能要件 |

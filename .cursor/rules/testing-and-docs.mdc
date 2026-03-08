@@ -1,0 +1,32 @@
+---
+description: Storybook・Vitest・TSDoc・コメントの必須ルール
+alwaysApply: true
+---
+
+# テスト・ドキュメント・コメントルール
+
+## UI コンポーネントと Storybook
+
+**UI コンポーネントを定義する場合は、Storybook を必須とする。**
+
+- `src/components/**/*.tsx` に配置する UI コンポーネントには、同階層に `*.stories.tsx` を必ず作成する
+- 例: `button.tsx` → `button.stories.tsx`
+- Storybook の stories は `src/**/*.stories.@(js|jsx|mjs|ts|tsx)` に配置
+- 各バリアント・状態（default, disabled, 各 size など）をストーリーでカバーする
+
+## 関数と Vitest・TSDoc
+
+**関数には TSDoc と Vitest を入れる。**
+
+- `src/lib/**/*.ts`、`src/utils/**/*.ts`、`src/features/**/utils/*.ts` などに配置する関数には:
+  1. **TSDoc**: 関数の目的、`@param`、`@returns`、`@example` を日本語で記載
+  2. **Vitest**: 同階層に `*.test.ts` または `*.test.tsx` を必ず作成する
+- 例: `utils.ts` → `utils.test.ts`、`delay.ts` → `delay.test.ts`
+
+## コメントは全て日本語
+
+**コメント、TSDoc、JSDoc、README、ドキュメントは全て日本語で記載する。**
+
+- ソースコード内のコメントは日本語のみ
+- TSDoc の `@param`、`@returns`、`@example` の説明も日本語
+- 変数・関数の説明コメントも日本語
