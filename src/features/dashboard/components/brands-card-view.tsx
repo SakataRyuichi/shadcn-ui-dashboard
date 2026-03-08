@@ -1,9 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
-import type { Brand } from "@/lib/mock/data";
 import { Checkbox } from "@/components/ui/checkbox";
+import type { Brand } from "@/lib/mock/data";
 import { BrandStatusBadge } from "./brand-status-badge";
 
 interface BrandsCardViewProps {
@@ -39,7 +38,7 @@ export function BrandsCardView({
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       {brands.map((brand) => (
         <button
           key={brand.id}

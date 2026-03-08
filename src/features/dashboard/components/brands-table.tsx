@@ -1,18 +1,20 @@
 "use client";
 
-import type { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, Table as TanStackTable } from "@tanstack/react-table";
 import {
   type ColumnFiltersState,
-  type SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -21,7 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ViewModeToggle } from "@/components/ui/view-mode-toggle";
 import type { Brand } from "@/lib/mock/data";
 import { useBrandSelectionStore } from "@/stores/use-brand-selection-store";
 import { useListViewModeStore } from "@/stores/use-list-view-mode-store";
@@ -30,9 +32,6 @@ import { BrandsCardView } from "./brands-card-view";
 import { brandsTableColumns, statusLabels } from "./brands-table-columns";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableSkeleton } from "./data-table-skeleton";
-import type { Table as TanStackTable } from "@tanstack/react-table";
-import { ViewModeToggle } from "@/components/ui/view-mode-toggle";
-import { Separator } from "@/components/ui/separator";
 import { DataTableSortDropdown } from "./data-table-sort-dropdown";
 import { DataTableToolbar } from "./data-table-toolbar";
 import { SelectionActionsBar } from "./selection-actions-bar";
@@ -190,9 +189,7 @@ export function BrandsTable({
   const selectionActive = enableSelectionMode && isSelectionMode;
   const toggleSelectionMode = useBrandSelectionStore((s) => s.toggleSelectionMode);
   const filteredBrands = (
-    selectionActive
-      ? table.getPrePaginationRowModel().rows
-      : table.getRowModel().rows
+    selectionActive ? table.getPrePaginationRowModel().rows : table.getRowModel().rows
   ).map((row) => row.original);
   const columns = useMemo(() => {
     if (!selectionActive) return brandsTableColumns;
@@ -203,13 +200,7 @@ export function BrandsTable({
       filteredBrands.map((b) => b.id),
     );
     return [selectionCol, ...brandsTableColumns];
-  }, [
-    selectionActive,
-    selectedIds,
-    toggleSelection,
-    selectAll,
-    filteredBrands,
-  ]);
+  }, [selectionActive, selectedIds, toggleSelection, selectAll, filteredBrands]);
 
   const tableWithSelection = useReactTable({
     data: data ?? [],
@@ -285,15 +276,12 @@ export function BrandsTable({
 
   if (mode === "card") {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {renderHeader && !selectionActive && renderHeader(table, sortOptions)}
         {renderToolbarRow()}
         {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
           <div className="flex justify-end">
-            <SelectionActionsBar
-              selectedCount={selectedIds.size}
-              onCancel={cancelSelection}
-            />
+            <SelectionActionsBar selectedCount={selectedIds.size} onCancel={cancelSelection} />
           </div>
         )}
         {!renderToolbar && !renderToolbarLeft && showFilters && !selectionActive && (
@@ -321,15 +309,12 @@ export function BrandsTable({
   const colSpan = selectionActive ? columns.length : brandsTableColumns.length;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       {renderHeader && !selectionActive && renderHeader(table, sortOptions)}
       {renderToolbarRow()}
       {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
         <div className="flex justify-end">
-          <SelectionActionsBar
-            selectedCount={selectedIds.size}
-            onCancel={cancelSelection}
-          />
+          <SelectionActionsBar selectedCount={selectedIds.size} onCancel={cancelSelection} />
         </div>
       )}
       {!renderToolbar && !renderToolbarLeft && showFilters && !selectionActive && (

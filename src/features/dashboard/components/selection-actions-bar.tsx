@@ -24,12 +24,7 @@ export function SelectionActionsBar({
   return (
     <div className="flex items-center gap-2">
       <span className="text-xs text-muted-foreground">{selectedCount} 件選択中</span>
-      <Button
-        variant="destructive"
-        size="sm"
-        className="h-8 gap-2 text-xs"
-        onClick={onDelete}
-      >
+      <Button variant="destructive" size="sm" className="h-8 gap-2 text-xs" onClick={onDelete}>
         <Trash2 className="size-3" />
         削除
       </Button>

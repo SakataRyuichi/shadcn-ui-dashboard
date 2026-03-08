@@ -1,7 +1,7 @@
 "use client";
 
-import type { User } from "@/lib/mock/data";
 import { Checkbox } from "@/components/ui/checkbox";
+import type { User } from "@/lib/mock/data";
 
 interface UsersCardViewProps {
   /** 表示するユーザー一覧 */
@@ -34,7 +34,7 @@ export function UsersCardView({
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       {users.map((user) => (
         <button
           key={user.id}

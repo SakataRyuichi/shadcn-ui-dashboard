@@ -1,7 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchBrandById, fetchBrands, fetchDashboardStats, fetchUsers } from "./mock-api";
+import {
+  fetchBrandById,
+  fetchBrands,
+  fetchDashboardStats,
+  fetchNotificationById,
+  fetchNotifications,
+  fetchUsers,
+} from "./mock-api";
 
 export const dashboardKeys = {
   all: ["dashboard"] as const,
@@ -9,6 +16,8 @@ export const dashboardKeys = {
   brands: () => [...dashboardKeys.all, "brands"] as const,
   brand: (id: string) => [...dashboardKeys.all, "brand", id] as const,
   users: () => [...dashboardKeys.all, "users"] as const,
+  notifications: () => [...dashboardKeys.all, "notifications"] as const,
+  notification: (id: string) => [...dashboardKeys.all, "notification", id] as const,
 };
 
 export function useDashboardStats() {
@@ -40,5 +49,23 @@ export function useUsers() {
   return useQuery({
     queryKey: dashboardKeys.users(),
     queryFn: fetchUsers,
+  });
+}
+
+export function useNotifications() {
+  return useQuery({
+    queryKey: dashboardKeys.notifications(),
+    queryFn: fetchNotifications,
+  });
+}
+
+export function useNotification(id: string | null) {
+  return useQuery({
+    queryKey: dashboardKeys.notification(id ?? ""),
+    queryFn: () => {
+      if (!id) throw new Error("id is required");
+      return fetchNotificationById(id);
+    },
+    enabled: !!id,
   });
 }

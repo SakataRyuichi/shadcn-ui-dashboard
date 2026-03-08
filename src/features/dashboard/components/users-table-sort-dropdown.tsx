@@ -38,11 +38,8 @@ export function UsersTableSortDropdown({
 }: UsersTableSortDropdownProps) {
   const currentOption = options.find((o) => o.id === sortBy);
   const isAsc = sortOrder === "asc";
-  const isDesc = sortOrder === "desc";
 
-  const label = currentOption
-    ? `${currentOption.label} ${isAsc ? "昇順" : "降順"}`
-    : "ソート";
+  const label = currentOption ? `${currentOption.label} ${isAsc ? "昇順" : "降順"}` : "ソート";
 
   return (
     <DropdownMenu>

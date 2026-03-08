@@ -1,8 +1,8 @@
 "use client";
 
 import { ViewModeToggle } from "@/components/ui/view-mode-toggle";
-import { DataTableSortDropdown } from "./data-table-sort-dropdown";
 import { BrandsTable } from "./brands-table";
+import { DataTableSortDropdown } from "./data-table-sort-dropdown";
 import { LatestNews } from "./latest-news";
 import { SectionHeader } from "./section-header";
 import { StatCards } from "./stat-cards";
@@ -31,14 +31,17 @@ export function DashboardContent() {
           showFilters={false}
           showPagination={false}
           limit={5}
-          renderHeader={() => (
-            <SectionHeader title="ブランド一覧" href="/brands" />
-          )}
-          renderToolbar={(table, sortOptions) => (
-            <div className="flex h-9 items-center gap-2">
-              <DataTableSortDropdown table={table} options={sortOptions} />
-              <ViewModeToggle />
-            </div>
+          renderHeader={(table, sortOptions) => (
+            <SectionHeader
+              title="ブランド一覧"
+              href="/brands"
+              action={
+                <div className="flex h-9 items-center gap-2">
+                  <DataTableSortDropdown table={table} options={sortOptions} />
+                  <ViewModeToggle />
+                </div>
+              }
+            />
           )}
         />
       </section>
@@ -46,20 +49,23 @@ export function DashboardContent() {
         <UsersTable
           showPagination={false}
           limit={5}
-          renderHeader={() => (
-            <SectionHeader title="ユーザー一覧" href="/users" />
-          )}
-          renderToolbar={(sortProps) => (
-            <div className="flex h-9 items-center gap-2">
-              <UsersTableSortDropdown
-                sortBy={sortProps.sortBy}
-                sortOrder={sortProps.sortOrder}
-                onSort={sortProps.onSort}
-                onClear={sortProps.onClear}
-                options={sortProps.options}
-              />
-              <ViewModeToggle />
-            </div>
+          renderHeader={(sortProps) => (
+            <SectionHeader
+              title="ユーザー一覧"
+              href="/users"
+              action={
+                <div className="flex h-9 items-center gap-2">
+                  <UsersTableSortDropdown
+                    sortBy={sortProps.sortBy}
+                    sortOrder={sortProps.sortOrder}
+                    onSort={sortProps.onSort}
+                    onClear={sortProps.onClear}
+                    options={sortProps.options}
+                  />
+                  <ViewModeToggle />
+                </div>
+              }
+            />
           )}
         />
       </section>

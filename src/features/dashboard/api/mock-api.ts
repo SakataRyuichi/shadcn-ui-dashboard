@@ -3,7 +3,9 @@ import {
   type DashboardStats,
   mockBrands,
   mockDashboardStats,
+  mockNotifications,
   mockUsers,
+  type Notification,
   type User,
 } from "@/lib/mock/data";
 import { delay } from "@/lib/mock/delay";
@@ -40,4 +42,19 @@ export async function fetchBrandById(id: string): Promise<Brand | null> {
  */
 export async function fetchUsers(): Promise<User[]> {
   return delay(getDelayMs(), mockUsers);
+}
+
+/**
+ * お知らせ一覧を取得（モック）
+ */
+export async function fetchNotifications(): Promise<Notification[]> {
+  return delay(getDelayMs(), mockNotifications);
+}
+
+/**
+ * ID でお知らせを取得（モック）
+ */
+export async function fetchNotificationById(id: string): Promise<Notification | null> {
+  const notification = mockNotifications.find((n) => n.id === id) ?? null;
+  return delay(getDelayMs(), notification);
 }

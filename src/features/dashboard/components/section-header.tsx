@@ -31,12 +31,12 @@ export function SectionHeader({ title, href, action }: SectionHeaderProps) {
 
   if (action) {
     return (
-      <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="mb-2 flex items-center justify-between gap-4">
         {titleContent}
         {action}
       </div>
     );
   }
 
-  return <div className="mb-4">{titleContent}</div>;
+  return <div className="mb-2">{titleContent}</div>;
 }

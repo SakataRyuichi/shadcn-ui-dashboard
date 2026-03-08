@@ -33,10 +33,7 @@ export function BrandsSection() {
         )}
         renderToolbarLeft={(ctx) =>
           ctx.selectionActive ? (
-            <SelectionActionsBar
-              selectedCount={ctx.selectedCount}
-              onCancel={ctx.cancelSelection}
-            />
+            <SelectionActionsBar selectedCount={ctx.selectedCount} onCancel={ctx.cancelSelection} />
           ) : (
             <Button
               variant="outline"

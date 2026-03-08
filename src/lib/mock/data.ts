@@ -27,6 +27,14 @@ export interface DashboardStats {
   recentActivity: number;
 }
 
+export interface Notification {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  isRead?: boolean;
+}
+
 const brandPrefixes = [
   "サンプルブランド",
   "テストブランド",
@@ -125,6 +133,33 @@ function generateUsers(count: number): User[] {
 
 export const mockBrands: Brand[] = generateBrands(50);
 export const mockUsers: User[] = generateUsers(50);
+
+export const mockNotifications: Notification[] = [
+  {
+    id: "1",
+    title: "デザインをリニューアルしました！",
+    content:
+      "Commune Engage のデザインをリニューアルしました。より使いやすく、見やすくなっています。ぜひ新しいインターフェースをお試しください。",
+    createdAt: "2025-03-08",
+    isRead: false,
+  },
+  {
+    id: "2",
+    title: "メンテナンスのお知らせ",
+    content:
+      "2025年3月15日（土）2:00〜6:00の間、システムメンテナンスを実施いたします。この間はサービスをご利用いただけません。ご不便をおかけしますが、ご理解のほどよろしくお願いいたします。",
+    createdAt: "2025-03-05",
+    isRead: true,
+  },
+  {
+    id: "3",
+    title: "新機能「お知らせ」を追加しました",
+    content:
+      "ヘッダー右上のベルアイコンから、お知らせ一覧をご確認いただけます。重要な情報はこちらでお届けします。",
+    createdAt: "2025-03-01",
+    isRead: true,
+  },
+];
 
 export const mockDashboardStats: DashboardStats = {
   totalBrands: mockBrands.length,

@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -9,18 +11,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
-import type { User } from "@/lib/mock/data";
-import { useUserSelectionStore } from "@/stores/use-user-selection-store";
-import { useListViewModeStore } from "@/stores/use-list-view-mode-store";
 import { ViewModeToggle } from "@/components/ui/view-mode-toggle";
-import { Separator } from "@/components/ui/separator";
+import type { User } from "@/lib/mock/data";
+import { useListViewModeStore } from "@/stores/use-list-view-mode-store";
+import { useUserSelectionStore } from "@/stores/use-user-selection-store";
 import { useUsers } from "../api/use-dashboard-data";
 import { DataTableSkeleton } from "./data-table-skeleton";
 import { ListPagination } from "./list-pagination";
 import { SelectionActionsBar } from "./selection-actions-bar";
-import type { SortOrder } from "./users-table-sort-dropdown";
 import { UsersCardView } from "./users-card-view";
+import type { SortOrder } from "./users-table-sort-dropdown";
 import { UsersTableSortDropdown } from "./users-table-sort-dropdown";
 
 const PAGE_SIZE = 10;
@@ -91,7 +91,10 @@ export function UsersTable({
   const [sortOrder, setSortOrder] = useState<SortOrder>(null);
 
   const users = data ?? [];
-  const sortedUsers = useMemo(() => sortUsers(users, sortBy, sortOrder), [users, sortBy, sortOrder]);
+  const sortedUsers = useMemo(
+    () => sortUsers(users, sortBy, sortOrder),
+    [users, sortBy, sortOrder],
+  );
   const selectionActive = enableSelectionMode && isSelectionMode;
   const displayUsers =
     limit && !selectionActive
@@ -175,15 +178,12 @@ export function UsersTable({
 
   if (mode === "card") {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {renderHeader && !selectionActive && renderHeader(sortProps)}
         {renderToolbarRow()}
         {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
           <div className="flex justify-end">
-            <SelectionActionsBar
-              selectedCount={selectedIds.size}
-              onCancel={cancelSelection}
-            />
+            <SelectionActionsBar selectedCount={selectedIds.size} onCancel={cancelSelection} />
           </div>
         )}
         {!renderToolbar && !renderToolbarLeft && !selectionActive && !renderHeader && (
@@ -216,15 +216,12 @@ export function UsersTable({
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       {renderHeader && !selectionActive && renderHeader(sortProps)}
       {renderToolbarRow()}
       {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
         <div className="flex justify-end">
-          <SelectionActionsBar
-            selectedCount={selectedIds.size}
-            onCancel={cancelSelection}
-          />
+          <SelectionActionsBar selectedCount={selectedIds.size} onCancel={cancelSelection} />
         </div>
       )}
       {!renderToolbar && !renderToolbarLeft && !selectionActive && !renderHeader && (
@@ -246,12 +243,9 @@ export function UsersTable({
                 <TableHead className="w-10">
                   <Checkbox
                     checked={
-                      displayUsers.length > 0 &&
-                      displayUsers.every((u) => selectedIds.has(u.id))
+                      displayUsers.length > 0 && displayUsers.every((u) => selectedIds.has(u.id))
                     }
-                    onCheckedChange={() =>
-                      selectAll(displayUsers.map((u) => u.id))
-                    }
+                    onCheckedChange={() => selectAll(displayUsers.map((u) => u.id))}
                     aria-label="すべて選択"
                     className="translate-y-0.5"
                   />
@@ -276,10 +270,7 @@ export function UsersTable({
                 }}
               >
                 {selectionActive && (
-                  <TableCell
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-10"
-                  >
+                  <TableCell onClick={(e) => e.stopPropagation()} className="w-10">
                     <Checkbox
                       checked={selectedIds.has(user.id)}
                       onCheckedChange={() => toggleSelection(user.id)}
@@ -288,9 +279,7 @@ export function UsersTable({
                     />
                   </TableCell>
                 )}
-                <TableCell className="font-mono text-muted-foreground">
-                  {user.id}
-                </TableCell>
+                <TableCell className="font-mono text-muted-foreground">{user.id}</TableCell>
                 <TableCell className="font-medium">{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.role}</TableCell>

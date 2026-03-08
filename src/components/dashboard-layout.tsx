@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { HeaderActions } from "@/components/header-actions";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,7 +31,7 @@ export function DashboardLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-10 shrink-0 items-center gap-2 border-b bg-background">
+        <header className="sticky top-0 z-10 flex h-10 shrink-0 items-center justify-between gap-2 border-b bg-background">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-2" />
             <Separator
@@ -66,6 +67,7 @@ export function DashboardLayout({
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+          <HeaderActions />
         </header>
         <div className="mx-auto flex w-full max-w-[1000px] flex-1 flex-col gap-4 p-8">
           {children}

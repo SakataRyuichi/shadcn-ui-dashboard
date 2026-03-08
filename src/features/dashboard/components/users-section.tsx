@@ -3,9 +3,9 @@
 import { CheckSquare, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { UsersTable } from "./users-table";
 import { SectionHeader } from "./section-header";
 import { SelectionActionsBar } from "./selection-actions-bar";
+import { UsersTable } from "./users-table";
 
 /**
  * ユーザー一覧セクション
@@ -30,10 +30,7 @@ export function UsersSection() {
         )}
         renderToolbarLeft={(ctx) =>
           ctx.selectionActive ? (
-            <SelectionActionsBar
-              selectedCount={ctx.selectedCount}
-              onCancel={ctx.cancelSelection}
-            />
+            <SelectionActionsBar selectedCount={ctx.selectedCount} onCancel={ctx.cancelSelection} />
           ) : (
             <Button
               variant="outline"

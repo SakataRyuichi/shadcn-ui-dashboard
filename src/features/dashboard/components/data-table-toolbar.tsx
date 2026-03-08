@@ -6,10 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableDateRangeFilter } from "./data-table-date-range-filter";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import {
-  DataTableSortDropdown,
-  type SortOption,
-} from "./data-table-sort-dropdown";
+import { DataTableSortDropdown, type SortOption } from "./data-table-sort-dropdown";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;

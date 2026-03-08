@@ -37,9 +37,7 @@ export function DataTableSortDropdown<TData>({
   const currentOption = options.find((o) => o.id === current?.id);
   const isAsc = current?.desc === false;
 
-  const label = currentOption
-    ? `${currentOption.label} ${isAsc ? "昇順" : "降順"}`
-    : "ソート";
+  const label = currentOption ? `${currentOption.label} ${isAsc ? "昇順" : "降順"}` : "ソート";
 
   const handleSort = (columnId: string, desc: boolean) => {
     table.setSorting([{ id: columnId, desc }]);

@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { HeaderActions } from "@/components/header-actions";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,19 +8,19 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { labelToIcon } from "@/config/nav";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { labelToIcon } from "@/config/nav";
 import { DashboardContent } from "@/features/dashboard/components/dashboard-content";
 
-const HomeIcon = labelToIcon["ホーム"];
+const HomeIcon = labelToIcon.ホーム;
 
 export default function Home() {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-10 shrink-0 items-center gap-2 border-b bg-background">
+        <header className="sticky top-0 z-10 flex h-10 shrink-0 items-center justify-between gap-2 border-b bg-background">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-2" />
             <Separator
@@ -43,6 +44,7 @@ export default function Home() {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+          <HeaderActions />
         </header>
         <div className="mx-auto flex w-full max-w-[1000px] flex-1 flex-col gap-4 p-8">
           <DashboardContent />
