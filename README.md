@@ -98,6 +98,12 @@ npx shadcn@latest add table
 
 ---
 
+## ドキュメント
+
+- [docs/refero-mcp.md](./docs/refero-mcp.md) — Refero MCP の使い方（デザイン参照用）
+
+---
+
 ## 設定ファイル一覧
 
 | ファイル | 用途 |
