@@ -7,11 +7,7 @@ import { cn } from "@/lib/utils";
  * リンクコンポーネント
  * 常にシャドーを表示し、hover 時はより強くする
  */
-function Link({
-  className,
-  href,
-  ...props
-}: React.ComponentProps<typeof NextLink>) {
+function Link({ className, href, ...props }: React.ComponentProps<typeof NextLink>) {
   return (
     <NextLink
       href={href}

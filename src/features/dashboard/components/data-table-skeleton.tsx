@@ -24,8 +24,8 @@ export function DataTableSkeleton({ rows = 5, columns = 4 }: DataTableSkeletonPr
       <Table>
         <TableHeader>
           <TableRow>
-            {/* biome-ignore lint/suspicious/noArrayIndexKey: スケルトンは静的プレースホルダーで並び替えがないため */}
             {Array.from({ length: columns }).map((_, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: スケルトンは静的プレースホルダーで並び替えがないため
               <TableHead key={`skeleton-col-${i}`}>
                 <Skeleton className="h-4 w-20" />
               </TableHead>
@@ -34,8 +34,10 @@ export function DataTableSkeleton({ rows = 5, columns = 4 }: DataTableSkeletonPr
         </TableHeader>
         <TableBody>
           {Array.from({ length: rows }).map((_, rowIndex) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: スケルトンは静的プレースホルダーで並び替えがないため
             <TableRow key={`skeleton-row-${rowIndex}`}>
               {Array.from({ length: columns }).map((_, colIndex) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: スケルトンは静的プレースホルダーで並び替えがないため
                 <TableCell key={`skeleton-cell-${rowIndex}-${colIndex}`}>
                   <Skeleton className="h-4 min-w-16 max-w-32" />
                 </TableCell>

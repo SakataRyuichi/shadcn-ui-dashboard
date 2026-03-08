@@ -34,10 +34,7 @@ const initialValues: BrandRegisterFormValues = {
 };
 
 /** 必須項目 */
-const REQUIRED_FIELDS: (keyof BrandRegisterFormValues)[] = [
-  "brandCd",
-  "brandName",
-];
+const REQUIRED_FIELDS: (keyof BrandRegisterFormValues)[] = ["brandCd", "brandName"];
 
 interface BrandRegisterFormProps {
   /** キャンセル時のコールバック（モーダル閉じ等） */
@@ -51,9 +48,10 @@ interface BrandRegisterFormProps {
 export function BrandRegisterForm({ onCancel }: BrandRegisterFormProps) {
   const [values, setValues] = useState<BrandRegisterFormValues>(initialValues);
 
-  const updateField = (field: keyof BrandRegisterFormValues) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValues((prev) => ({ ...prev, [field]: e.target.value }));
-  };
+  const updateField =
+    (field: keyof BrandRegisterFormValues) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValues((prev) => ({ ...prev, [field]: e.target.value }));
+    };
 
   const isFormValid = useMemo(() => {
     return REQUIRED_FIELDS.every((field) => values[field].trim() !== "");
@@ -76,93 +74,97 @@ export function BrandRegisterForm({ onCancel }: BrandRegisterFormProps) {
       <div className="relative min-h-0 flex-1 overflow-auto">
         <FormLayout className="pb-20">
           <FormSection title="ブランド情報" description="ブランドの基本情報を入力してください。">
-          <FormField
-            label="ブランドCD"
-            required
-            error
-            errorMessage="ブランドCDを入力してください"
-            htmlFor="brandCd"
-          >
-            <Input
-              id="brandCd"
-              value={values.brandCd}
-              onChange={updateField("brandCd")}
-              placeholder="commune"
-            />
-          </FormField>
-          <FormField label="ブランド名" required htmlFor="brandName">
-            <Input
-              id="brandName"
-              value={values.brandName}
-              onChange={updateField("brandName")}
-              placeholder="コミューン"
-            />
-          </FormField>
-          <FormField label="LINEチャネルID" required={false} htmlFor="lineChannelId">
-            <Input
-              id="lineChannelId"
-              value={values.lineChannelId}
-              onChange={updateField("lineChannelId")}
-              placeholder="0000000000"
-            />
-          </FormField>
-          <FormField label="LINEチャネルシークレット" required={false} htmlFor="lineChannelSecret">
-            <Input
-              id="lineChannelSecret"
-              type="password"
-              value={values.lineChannelSecret}
-              onChange={updateField("lineChannelSecret")}
-              placeholder="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-            />
-          </FormField>
-          <FormField label="LIFF ID" required={false} htmlFor="liffId">
-            <Input
-              id="liffId"
-              value={values.liffId}
-              onChange={updateField("liffId")}
-              placeholder="0000000000-XXXXXXXX"
-            />
-          </FormField>
-        </FormSection>
+            <FormField
+              label="ブランドCD"
+              required
+              error
+              errorMessage="ブランドCDを入力してください"
+              htmlFor="brandCd"
+            >
+              <Input
+                id="brandCd"
+                value={values.brandCd}
+                onChange={updateField("brandCd")}
+                placeholder="commune"
+              />
+            </FormField>
+            <FormField label="ブランド名" required htmlFor="brandName">
+              <Input
+                id="brandName"
+                value={values.brandName}
+                onChange={updateField("brandName")}
+                placeholder="コミューン"
+              />
+            </FormField>
+            <FormField label="LINEチャネルID" required={false} htmlFor="lineChannelId">
+              <Input
+                id="lineChannelId"
+                value={values.lineChannelId}
+                onChange={updateField("lineChannelId")}
+                placeholder="0000000000"
+              />
+            </FormField>
+            <FormField
+              label="LINEチャネルシークレット"
+              required={false}
+              htmlFor="lineChannelSecret"
+            >
+              <Input
+                id="lineChannelSecret"
+                type="password"
+                value={values.lineChannelSecret}
+                onChange={updateField("lineChannelSecret")}
+                placeholder="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+              />
+            </FormField>
+            <FormField label="LIFF ID" required={false} htmlFor="liffId">
+              <Input
+                id="liffId"
+                value={values.liffId}
+                onChange={updateField("liffId")}
+                placeholder="0000000000-XXXXXXXX"
+              />
+            </FormField>
+          </FormSection>
 
-        <FormSection
-          title="Commune共通認証基盤設定"
-          description="共有認証基盤で作成したテナント情報を入力してください。"
-        >
-          <FormField label="テナントコード" required={false} htmlFor="tenantCode">
-            <Input
-              id="tenantCode"
-              value={values.tenantCode}
-              onChange={updateField("tenantCode")}
-              placeholder="tenant-code"
-            />
-          </FormField>
-          <FormField label="認証グループコード" required={false} htmlFor="authGroupCode">
-            <Input
-              id="authGroupCode"
-              value={values.authGroupCode}
-              onChange={updateField("authGroupCode")}
-              placeholder="group-code"
-            />
-          </FormField>
-          <FormField label="クライアントID" required={false} htmlFor="clientId">
-            <Input
-              id="clientId"
-              value={values.clientId}
-              onChange={updateField("clientId")}
-              placeholder="client-id"
-            />
-          </FormField>
-          <FormField label="クライアントシークレット" required={false} htmlFor="clientSecret">
-            <Input
-              id="clientSecret"
-              type="password"
-              value={values.clientSecret}
-              onChange={updateField("clientSecret")}
-              placeholder="client-secret"
-            />
-          </FormField>
-        </FormSection>
+          <FormSection
+            title="Commune共通認証基盤設定"
+            description="共有認証基盤で作成したテナント情報を入力してください。"
+          >
+            <FormField label="テナントコード" required={false} htmlFor="tenantCode">
+              <Input
+                id="tenantCode"
+                value={values.tenantCode}
+                onChange={updateField("tenantCode")}
+                placeholder="tenant-code"
+              />
+            </FormField>
+            <FormField label="認証グループコード" required={false} htmlFor="authGroupCode">
+              <Input
+                id="authGroupCode"
+                value={values.authGroupCode}
+                onChange={updateField("authGroupCode")}
+                placeholder="group-code"
+              />
+            </FormField>
+            <FormField label="クライアントID" required={false} htmlFor="clientId">
+              <Input
+                id="clientId"
+                value={values.clientId}
+                onChange={updateField("clientId")}
+                placeholder="client-id"
+              />
+            </FormField>
+            <FormField label="クライアントシークレット" required={false} htmlFor="clientSecret">
+              <Input
+                id="clientSecret"
+                type="password"
+                value={values.clientSecret}
+                onChange={updateField("clientSecret")}
+                placeholder="client-secret"
+              />
+            </FormField>
+          </FormSection>
         </FormLayout>
         {/* コンテンツが続くことを示すグラデーション（決定ボタン直上に固定） */}
         <div

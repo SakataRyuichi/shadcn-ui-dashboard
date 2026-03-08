@@ -42,9 +42,7 @@ function FormSection({
     >
       <div className="flex flex-col gap-1">
         <h3 className="text-xl font-semibold text-foreground">{title}</h3>
-        {description && (
-          <p className="text-sm text-slate-500">{description}</p>
-        )}
+        {description && <p className="text-sm text-slate-500">{description}</p>}
       </div>
       <div className="flex flex-col gap-4">{children}</div>
     </div>
@@ -60,9 +58,7 @@ function FormFieldBadge({ required }: { required: boolean }) {
       data-slot="form-field-badge"
       className={cn(
         "inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium",
-        required
-          ? "bg-destructive/10 text-destructive"
-          : "bg-muted text-muted-foreground",
+        required ? "bg-destructive/10 text-destructive" : "bg-muted text-muted-foreground",
       )}
     >
       {required ? "必須" : "任意"}
@@ -94,25 +90,19 @@ function FormField({
   /** ラベルと紐づく入力のid */
   htmlFor?: string;
 }) {
-  const childWithError = error && isValidElement(children)
-    ? cloneElement(children as React.ReactElement<{ "aria-invalid"?: boolean }>, {
-        "aria-invalid": true,
-      })
-    : children;
+  const childWithError =
+    error && isValidElement(children)
+      ? cloneElement(children as React.ReactElement<{ "aria-invalid"?: boolean }>, {
+          "aria-invalid": true,
+        })
+      : children;
 
   return (
-    <div
-      data-slot="form-field"
-      className={cn("flex flex-col gap-2", className)}
-      {...props}
-    >
+    <div data-slot="form-field" className={cn("flex flex-col gap-2", className)} {...props}>
       <div className="flex items-center gap-2">
         <label
           htmlFor={htmlFor}
-          className={cn(
-            "text-sm font-semibold",
-            error ? "text-destructive" : "text-foreground",
-          )}
+          className={cn("text-sm font-semibold", error ? "text-destructive" : "text-foreground")}
         >
           {label}
         </label>

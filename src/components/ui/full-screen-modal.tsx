@@ -17,7 +17,14 @@ function FullScreenModalRoot({
   onOpenChange,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="full-screen-modal" open={open} onOpenChange={onOpenChange} {...props} />;
+  return (
+    <DialogPrimitive.Root
+      data-slot="full-screen-modal"
+      open={open}
+      onOpenChange={onOpenChange}
+      {...props}
+    />
+  );
 }
 
 function FullScreenModalPortal(props: React.ComponentProps<typeof DialogPrimitive.Portal>) {
@@ -115,7 +122,7 @@ function FullScreenModalContent({
             </div>
           )}
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-8 pt-6">
-            {isContentReady ? children : ghost ?? defaultGhost}
+            {isContentReady ? children : (ghost ?? defaultGhost)}
           </div>
         </div>
       </DialogPrimitive.Content>

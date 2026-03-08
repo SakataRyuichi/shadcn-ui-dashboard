@@ -7,6 +7,7 @@ import type { ComponentProps } from "react";
 import { useEffect } from "react";
 import { EngageLogo } from "@/components/engage-logo";
 import { NavUser } from "@/components/nav-user";
+import { useBrandRegisterModalStore } from "@/stores/use-brand-register-modal-store";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -40,7 +41,7 @@ const data = {
       url: "/brands",
       icon: <ShieldCheck className="size-4" />,
       items: [
-        { title: "ブランド登録", url: "/brands/register" },
+        { title: "ブランド登録", url: "/brands/register", openModal: "brandRegister" as const },
         { title: "ブランド一覧", url: "/brands" },
       ],
     },
@@ -80,6 +81,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const isCollapsed = state === "collapsed";
   const { setMenuOpen, isMenuOpen } = useSidebarMenuStore();
+  const openBrandRegisterModal = useBrandRegisterModalStore((s) => s.open);
 
   // 下層ページに遷移した際、アクティブな親メニューを展開状態にする
   useEffect(() => {
@@ -127,9 +129,18 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                       <SidebarMenuSub>
                         {item.items.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
-                              <Link href={subItem.url}>{subItem.title}</Link>
-                            </SidebarMenuSubButton>
+                            {"openModal" in subItem && subItem.openModal === "brandRegister" ? (
+                              <SidebarMenuSubButton
+                                onClick={openBrandRegisterModal}
+                                isActive={false}
+                              >
+                                {subItem.title}
+                              </SidebarMenuSubButton>
+                            ) : (
+                              <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
+                                <Link href={subItem.url}>{subItem.title}</Link>
+                              </SidebarMenuSubButton>
+                            )}
                           </SidebarMenuSubItem>
                         ))}
                       </SidebarMenuSub>
