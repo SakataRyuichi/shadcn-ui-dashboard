@@ -21,11 +21,13 @@ import {
 function getInitials(name: string): string {
   const parts = name.split(/\s+/).filter(Boolean);
   if (parts.length >= 2) {
-    return (parts[0][0] + parts.at(-1)![0]).toUpperCase().slice(0, 2);
+    const last = parts.at(-1)?.[0] ?? "";
+    return (parts[0][0] + last).toUpperCase().slice(0, 2);
   }
   const camelParts = name.match(/[A-Z][a-z]*/g);
   if (camelParts && camelParts.length >= 2) {
-    return (camelParts[0][0] + camelParts.at(-1)![0]).toUpperCase().slice(0, 2);
+    const last = camelParts.at(-1)?.[0] ?? "";
+    return (camelParts[0][0] + last).toUpperCase().slice(0, 2);
   }
   return name.slice(0, 2).toUpperCase() || "?";
 }

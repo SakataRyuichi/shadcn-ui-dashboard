@@ -1,8 +1,11 @@
 "use client";
 
 import { BrandsTable } from "./brands-table";
+import { LatestNews } from "./latest-news";
+import { SectionHeader } from "./section-header";
 import { StatCards } from "./stat-cards";
 import { UsersTable } from "./users-table";
+import { WelcomeMessage } from "./welcome-message";
 
 /**
  * ダッシュボードのメインコンテンツ
@@ -11,13 +14,20 @@ import { UsersTable } from "./users-table";
 export function DashboardContent() {
   return (
     <div className="flex flex-col gap-6">
-      <StatCards />
+      <WelcomeMessage />
       <section>
-        <h2 className="mb-4 text-lg font-semibold">ブランド一覧</h2>
-        <BrandsTable />
+        <LatestNews />
       </section>
       <section>
-        <h2 className="mb-4 text-lg font-semibold">ユーザー一覧</h2>
+        <SectionHeader title="アクティビティ" />
+        <StatCards />
+      </section>
+      <section>
+        <SectionHeader title="ブランド一覧" href="/brands" />
+        <BrandsTable showFilters={false} />
+      </section>
+      <section>
+        <SectionHeader title="ユーザー一覧" href="/users" />
         <UsersTable />
       </section>
     </div>

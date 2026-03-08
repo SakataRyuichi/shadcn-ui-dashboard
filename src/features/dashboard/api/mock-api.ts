@@ -28,6 +28,14 @@ export async function fetchBrands(): Promise<Brand[]> {
 }
 
 /**
+ * ID でブランドを取得（モック）
+ */
+export async function fetchBrandById(id: string): Promise<Brand | null> {
+  const brand = mockBrands.find((b) => b.id === id) ?? null;
+  return delay(getDelayMs(), brand);
+}
+
+/**
  * ユーザー一覧を取得（モック）
  */
 export async function fetchUsers(): Promise<User[]> {

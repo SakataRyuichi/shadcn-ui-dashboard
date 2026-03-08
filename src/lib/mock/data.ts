@@ -3,10 +3,13 @@
  * 本番 API 接続前に仮データとして使用
  */
 
+export type BrandStatus = "active" | "inactive" | "pending";
+
 export interface Brand {
   id: string;
   name: string;
   description: string;
+  status: BrandStatus;
   createdAt: string;
 }
 
@@ -29,18 +32,21 @@ export const mockBrands: Brand[] = [
     id: "1",
     name: "サンプルブランドA",
     description: "テスト用ブランドの説明",
+    status: "active",
     createdAt: "2025-01-15",
   },
   {
     id: "2",
     name: "サンプルブランドB",
     description: "2つ目のテストブランド",
+    status: "inactive",
     createdAt: "2025-02-20",
   },
   {
     id: "3",
     name: "サンプルブランドC",
     description: "3つ目のサンプルデータ",
+    status: "pending",
     createdAt: "2025-03-01",
   },
 ];

@@ -1,12 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchBrands, fetchDashboardStats, fetchUsers } from "./mock-api";
+import { fetchBrandById, fetchBrands, fetchDashboardStats, fetchUsers } from "./mock-api";
 
 export const dashboardKeys = {
   all: ["dashboard"] as const,
   stats: () => [...dashboardKeys.all, "stats"] as const,
   brands: () => [...dashboardKeys.all, "brands"] as const,
+  brand: (id: string) => [...dashboardKeys.all, "brand", id] as const,
   users: () => [...dashboardKeys.all, "users"] as const,
 };
 
@@ -21,6 +22,17 @@ export function useBrands() {
   return useQuery({
     queryKey: dashboardKeys.brands(),
     queryFn: fetchBrands,
+  });
+}
+
+export function useBrand(id: string | null) {
+  return useQuery({
+    queryKey: dashboardKeys.brand(id ?? ""),
+    queryFn: () => {
+      if (!id) throw new Error("id is required");
+      return fetchBrandById(id);
+    },
+    enabled: !!id,
   });
 }
 

@@ -2,12 +2,11 @@
 
 import { BookOpen, ChevronRight, Home, ShieldCheck, Users } from "lucide-react";
 import Link from "next/link";
-import { EngageLogo } from "@/components/engage-logo";
 import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
+import { useEffect } from "react";
+import { EngageLogo } from "@/components/engage-logo";
 import { NavUser } from "@/components/nav-user";
-import { useSidebar } from "@/components/ui/sidebar";
-import { useCurrentUser } from "@/features/auth/hooks/use-current-user";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -23,7 +22,10 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { useCurrentUser } from "@/features/auth/hooks/use-current-user";
+import { useSidebarMenuStore } from "@/stores/use-sidebar-menu-store";
 
 // サイドメニュー構成（docs/requirements/sidebar-menu.md 参照）
 const data = {
@@ -35,20 +37,20 @@ const data = {
     },
     {
       title: "ブランド",
-      url: "#",
+      url: "/brands",
       icon: <ShieldCheck className="size-4" />,
       items: [
-        { title: "ブランド登録", url: "#" },
-        { title: "ブランド一覧", url: "#" },
+        { title: "ブランド登録", url: "/brands/register" },
+        { title: "ブランド一覧", url: "/brands" },
       ],
     },
     {
       title: "ユーザー",
-      url: "#",
+      url: "/users",
       icon: <Users className="size-4" />,
       items: [
-        { title: "ユーザー登録", url: "#" },
-        { title: "ユーザー一覧", url: "#" },
+        { title: "ユーザー登録", url: "/users/register" },
+        { title: "ユーザー一覧", url: "/users" },
       ],
     },
     {
@@ -56,18 +58,38 @@ const data = {
       url: "#",
       icon: <BookOpen className="size-4" />,
       items: [
-        { title: "スクリプト", url: "#" },
-        { title: "利用規約", url: "#" },
+        { title: "スクリプト", url: "/scripts" },
+        { title: "利用規約", url: "/terms" },
       ],
     },
   ],
 };
+
+/** 現在のパスが指定メニューの配下かどうかを判定する */
+function isPathUnderMenu(
+  pathname: string,
+  item: { url: string; items?: { url: string }[] },
+): boolean {
+  if (!item.items) return false;
+  return item.items.some((sub) => pathname === sub.url || pathname.startsWith(`${sub.url}/`));
+}
 
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   const { data: user, isLoading } = useCurrentUser();
   const { state } = useSidebar();
   const pathname = usePathname();
   const isCollapsed = state === "collapsed";
+  const { setMenuOpen, isMenuOpen } = useSidebarMenuStore();
+
+  // 下層ページに遷移した際、アクティブな親メニューを展開状態にする
+  useEffect(() => {
+    for (const item of data.navMain) {
+      if ("items" in item && item.items && isPathUnderMenu(pathname, item)) {
+        setMenuOpen(item.title, true);
+        break;
+      }
+    }
+  }, [pathname, setMenuOpen]);
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -89,7 +111,8 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                 <Collapsible
                   key={item.title}
                   asChild
-                  defaultOpen={false}
+                  open={isMenuOpen(item.title, isPathUnderMenu(pathname, item))}
+                  onOpenChange={(open) => setMenuOpen(item.title, open)}
                   className="group/collapsible"
                 >
                   <SidebarMenuItem>
@@ -104,8 +127,8 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
                       <SidebarMenuSub>
                         {item.items.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>{subItem.title}</a>
+                            <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
+                              <Link href={subItem.url}>{subItem.title}</Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

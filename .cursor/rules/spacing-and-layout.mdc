@@ -1,0 +1,35 @@
+---
+description: 余白・スペーシングは偶数を基準とし、Tailwind の spacing スケールを参照する
+alwaysApply: true
+---
+
+# 余白・スペーシングルール
+
+## 基本原則
+
+- **余白は偶数を基準とする**: `2`, `4`, `6`, `8`, `10`, `12`, `16` など Tailwind の偶数 spacing を使用
+- **Tailwind の spacing スケールを参照**: 独自の px 値は使わず、Tailwind の定義済みユーティリティを使用
+
+## Tailwind デフォルト spacing（参考）
+
+| クラス | 値 | ピクセル (16px base) |
+|--------|-----|----------------------|
+| 0 | 0 | 0px |
+| 2 | 0.5rem | 8px |
+| 4 | 1rem | 16px |
+| 6 | 1.5rem | 24px |
+| 8 | 2rem | 32px |
+| 10 | 2.5rem | 40px |
+| 12 | 3rem | 48px |
+| 16 | 4rem | 64px |
+
+## 推奨パターン
+
+```tsx
+// ✅ 偶数 spacing を使用
+<div className="gap-2 p-4">     // gap: 8px, padding: 16px
+<header className="h-8 px-4">  // height: 32px, padding: 16px
+
+// ❌ 奇数 spacing は避ける（特別な理由がない限り）
+<div className="gap-1 p-3">     // gap: 4px, padding: 12px
+```

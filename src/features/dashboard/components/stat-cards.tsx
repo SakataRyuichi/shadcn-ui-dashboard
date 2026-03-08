@@ -16,8 +16,8 @@ export function StatCards() {
   if (isLoading) {
     return (
       <div className="grid gap-4 md:grid-cols-3">
-        {statItems.map((_, i) => (
-          <StatCardSkeleton key={i} />
+        {statItems.map((item) => (
+          <StatCardSkeleton key={item.key} />
         ))}
       </div>
     );
@@ -28,7 +28,7 @@ export function StatCards() {
       {statItems.map(({ label, key, suffix }) => (
         <Card key={key}>
           <CardHeader className="pb-2">
-            <p className="text-sm text-muted-foreground">{label}</p>
+            <p className="text-sm text-foreground">{label}</p>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold">
