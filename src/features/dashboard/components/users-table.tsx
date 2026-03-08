@@ -179,7 +179,7 @@ export function UsersTable({
   if (mode === "card") {
     return (
       <div className="flex flex-col gap-2">
-        {renderHeader && !selectionActive && renderHeader(sortProps)}
+        {renderHeader && renderHeader(sortProps)}
         {renderToolbarRow()}
         {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
           <div className="flex justify-end">
@@ -217,7 +217,7 @@ export function UsersTable({
 
   return (
     <div className="flex flex-col gap-2">
-      {renderHeader && !selectionActive && renderHeader(sortProps)}
+      {renderHeader && renderHeader(sortProps)}
       {renderToolbarRow()}
       {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
         <div className="flex justify-end">

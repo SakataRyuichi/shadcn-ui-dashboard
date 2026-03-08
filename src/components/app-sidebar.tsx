@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, ChevronRight, Home, ShieldCheck, Users } from "lucide-react";
+import { BookOpen, ChevronRight, Home, Settings, ShieldCheck, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { EngageLogo } from "@/components/engage-logo";
 import { NavUser } from "@/components/nav-user";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
@@ -171,6 +172,26 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              tooltip="設定"
+              isActive={pathname === "/settings"}
+              className={
+                pathname === "/settings"
+                  ? "data-[active]:bg-primary data-[active]:text-primary-foreground data-[active]:[&_svg]:text-primary-foreground data-[active]:hover:bg-primary/90 data-[active]:hover:text-primary-foreground data-[active]:hover:[&_svg]:text-primary-foreground"
+                  : undefined
+              }
+            >
+              <Link href="/settings">
+                <Settings className="size-4" />
+                <span>設定</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+        <Separator className="mx-2" />
         {user ? (
           <NavUser user={user} />
         ) : isLoading ? (

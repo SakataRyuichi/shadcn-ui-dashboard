@@ -1,4 +1,4 @@
-import { Bell, BookOpen, Home, type LucideIcon, ShieldCheck, Users } from "lucide-react";
+import { Bell, BookOpen, Home, type LucideIcon, Settings, ShieldCheck, Users } from "lucide-react";
 
 /**
  * パンくず・ページタイトル用のラベル→アイコン対応
@@ -17,6 +17,8 @@ export const labelToIcon: Record<string, LucideIcon> = {
   ユーザー: Users,
   ユーザー一覧: Users,
   ユーザー登録: Users,
+  // 設定（Settings）
+  設定: Settings,
   // お知らせ（Bell）
   お知らせ: Bell,
   詳細: Bell,

@@ -249,7 +249,7 @@ export function BrandsTable({
             orientation="vertical"
             className="h-4 shrink-0 self-center data-[orientation=vertical]:self-center"
           />
-          {showFilters && (
+          {showFilters && !selectionActive && (
             <DataTableToolbar
               table={table}
               searchPlaceholder="ブランド名で検索..."
@@ -277,7 +277,7 @@ export function BrandsTable({
   if (mode === "card") {
     return (
       <div className="flex flex-col gap-2">
-        {renderHeader && !selectionActive && renderHeader(table, sortOptions)}
+        {renderHeader && renderHeader(table, sortOptions)}
         {renderToolbarRow()}
         {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
           <div className="flex justify-end">
@@ -310,7 +310,7 @@ export function BrandsTable({
 
   return (
     <div className="flex flex-col gap-2">
-      {renderHeader && !selectionActive && renderHeader(table, sortOptions)}
+      {renderHeader && renderHeader(table, sortOptions)}
       {renderToolbarRow()}
       {!renderToolbar && !renderToolbarLeft && selectionActive && selectedIds.size > 0 && (
         <div className="flex justify-end">
