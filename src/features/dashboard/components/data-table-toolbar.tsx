@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableDateRangeFilter } from "./data-table-date-range-filter";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import {
+  DataTableSortDropdown,
+  type SortOption,
+} from "./data-table-sort-dropdown";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -24,6 +28,10 @@ interface DataTableToolbarProps<TData> {
     columnId: string;
     title?: string;
   };
+  /** ソートオプション（指定時はテーブル外にソートUIを表示、テーブル・カード両対応） */
+  sortOptions?: SortOption[];
+  /** ソートをツールバーに表示するか（false の場合はヘッダー側に表示する想定） */
+  showSort?: boolean;
 }
 
 /**
@@ -36,6 +44,8 @@ export function DataTableToolbar<TData>({
   searchColumn,
   facetedFilters = [],
   dateRangeFilter,
+  sortOptions = [],
+  showSort = true,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -95,6 +105,11 @@ export function DataTableToolbar<TData>({
           リセット
           <X className="ml-2 size-3" />
         </Button>
+      )}
+      {sortOptions.length > 0 && showSort && (
+        <div className="ml-auto">
+          <DataTableSortDropdown table={table} options={sortOptions} />
+        </div>
       )}
     </div>
   );

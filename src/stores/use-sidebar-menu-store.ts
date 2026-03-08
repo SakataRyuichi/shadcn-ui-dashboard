@@ -12,16 +12,20 @@ interface SidebarMenuState {
 /**
  * サイドバーメニューの展開状態を管理する zustand ストア
  *
- * ページ遷移時も展開状態を維持し、下層ページではアクティブな親メニューを展開したままにする。
+ * デフォルトは全メニュー展開。ページ遷移時も展開状態を維持する。
  */
 export const useSidebarMenuStore = create<SidebarMenuState>((set, get) => ({
-  openMenus: {},
+  openMenus: {
+    ブランド: true,
+    ユーザー: true,
+    その他: true,
+  },
   setMenuOpen: (key, open) =>
     set((state) => ({
       openMenus: { ...state.openMenus, [key]: open },
     })),
-  isMenuOpen: (key, defaultValue) => {
+  isMenuOpen: (key, _defaultValue) => {
     const { openMenus } = get();
-    return openMenus[key] ?? defaultValue;
+    return openMenus[key] ?? true;
   },
 }));

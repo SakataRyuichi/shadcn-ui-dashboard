@@ -1,0 +1,43 @@
+---
+description: リンク以外のクリック可能コンポーネントに cursor-pointer を付けるルール
+alwaysApply: true
+---
+
+# クリック可能コンポーネントと cursor-pointer
+
+**リンク（`<a href>`）ではないクリック可能なコンポーネントには、必ず `cursor-pointer` を付ける。**
+
+## 対象
+
+- `onClick` を持つ要素（`<button>` 以外）
+- `onSelect` で選択可能な要素（CommandItem など）
+- クリックで開閉するトリガー（CollapsibleTrigger、PopoverTrigger など）
+- カスタムのクリック可能な div/span など
+
+## 例
+
+```tsx
+// ✅ ボタン・リンクはデフォルトで pointer だが、明示してもよい
+<Button onClick={...} className="cursor-pointer" />
+
+// ✅ クリック可能なカード
+<button
+  type="button"
+  onClick={() => router.push(`/brands/${id}`)}
+  className="cursor-pointer ..."
+>
+
+// ✅ サイドバーメニュー、CollapsibleTrigger など
+className="cursor-pointer ..."
+```
+
+## リンクは対象外
+
+`<Link href="...">` や `<a href="...">` はブラウザ標準で `cursor: pointer` になるため、追加不要。
+
+## シャドウアニメーション
+
+クリック可能でシャドウを持つコンポーネントには、ふんわりとしたアニメーションを付ける。
+
+- ユーティリティ: `transition-shadow-soft`（globals.css で定義、300ms ease-out）
+- 使用例: `shadow-primary transition-shadow-soft hover:shadow-primary-lg`

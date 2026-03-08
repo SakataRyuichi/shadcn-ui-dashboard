@@ -7,9 +7,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { labelToIcon } from "@/config/nav";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardContent } from "@/features/dashboard/components/dashboard-content";
+
+const HomeIcon = labelToIcon["ホーム"];
 
 export default function Home() {
   return (
@@ -30,13 +33,18 @@ export default function Home() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>ホーム</BreadcrumbPage>
+                  <BreadcrumbPage>
+                    <span className="inline-flex items-center gap-1.5">
+                      {HomeIcon && <HomeIcon className="size-4 shrink-0" />}
+                      ホーム
+                    </span>
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-8">
+        <div className="mx-auto flex w-full max-w-[1000px] flex-1 flex-col gap-4 p-8">
           <DashboardContent />
         </div>
       </SidebarInset>

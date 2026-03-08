@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { labelToIcon } from "@/config/nav";
 
 /**
  * ダッシュボードレイアウト
@@ -40,24 +42,34 @@ export function DashboardLayout({
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="/">Commune Engage</BreadcrumbLink>
                 </BreadcrumbItem>
-                {breadcrumb.items.flatMap((item) => [
-                  <BreadcrumbSeparator
-                    key={`sep-${item.label}-${item.href ?? "current"}`}
-                    className="hidden md:block"
-                  />,
-                  <BreadcrumbItem key={`${item.label}-${item.href ?? "current"}`}>
-                    {item.href ? (
-                      <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
-                    ) : (
-                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                    )}
-                  </BreadcrumbItem>,
-                ])}
+                {breadcrumb.items.map((item) => (
+                  <Fragment key={`${item.label}-${item.href ?? "current"}`}>
+                    <BreadcrumbSeparator className="hidden md:block" />
+                    <BreadcrumbItem>
+                      {(() => {
+                        const Icon = labelToIcon[item.label];
+                        const labelContent = (
+                          <span className="inline-flex items-center gap-1.5">
+                            {Icon && <Icon className="size-4 shrink-0" />}
+                            {item.label}
+                          </span>
+                        );
+                        return item.href ? (
+                          <BreadcrumbLink href={item.href}>{labelContent}</BreadcrumbLink>
+                        ) : (
+                          <BreadcrumbPage>{labelContent}</BreadcrumbPage>
+                        );
+                      })()}
+                    </BreadcrumbItem>
+                  </Fragment>
+                ))}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-8">{children}</div>
+        <div className="mx-auto flex w-full max-w-[1000px] flex-1 flex-col gap-4 p-8">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

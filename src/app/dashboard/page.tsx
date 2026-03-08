@@ -7,8 +7,11 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { labelToIcon } from "@/config/nav";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+
+const DashboardIcon = labelToIcon["ダッシュボード"];
 
 export default function Page() {
   return (
@@ -29,7 +32,12 @@ export default function Page() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>ダッシュボード</BreadcrumbPage>
+                  <BreadcrumbPage>
+                    <span className="inline-flex items-center gap-1.5">
+                      {DashboardIcon && <DashboardIcon className="size-4 shrink-0" />}
+                      ダッシュボード
+                    </span>
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

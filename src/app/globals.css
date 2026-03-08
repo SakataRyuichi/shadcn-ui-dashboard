@@ -60,6 +60,9 @@
   --shadow-primary-lg:
     0 4px 6px -1px color-mix(in oklch, var(--primary) 14%, transparent),
     0 10px 15px -3px color-mix(in oklch, var(--primary) 10%, transparent);
+  /* クリック可能コンポーネントのシャドウアニメーション（ふんわり） */
+  --ease-out-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-shadow: 300ms;
 }
 
 :root {
@@ -129,6 +132,15 @@
   --sidebar-accent-foreground: oklch(0.623 0.214 259.815);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.623 0.214 259.815);
+}
+
+@layer utilities {
+  /* クリック可能コンポーネント共通：シャドウのふんわりアニメーション */
+  .transition-shadow-soft {
+    transition-property: box-shadow;
+    transition-duration: var(--duration-shadow);
+    transition-timing-function: var(--ease-out-soft);
+  }
 }
 
 @layer base {

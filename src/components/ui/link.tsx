@@ -12,7 +12,7 @@ function Link({ className, href, ...props }: React.ComponentProps<typeof NextLin
     <NextLink
       href={href}
       className={cn(
-        "inline-flex items-center gap-2 rounded-lg shadow-primary transition-shadow hover:shadow-primary-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "inline-flex items-center gap-2 rounded-lg shadow-primary transition-shadow-soft hover:shadow-primary-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className,
       )}
       {...props}

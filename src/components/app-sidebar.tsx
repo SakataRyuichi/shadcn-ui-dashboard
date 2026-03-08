@@ -7,7 +7,6 @@ import type { ComponentProps } from "react";
 import { useEffect } from "react";
 import { EngageLogo } from "@/components/engage-logo";
 import { NavUser } from "@/components/nav-user";
-import { useBrandRegisterModalStore } from "@/stores/use-brand-register-modal-store";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
@@ -26,6 +25,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useCurrentUser } from "@/features/auth/hooks/use-current-user";
+import { useBrandRegisterModalStore } from "@/stores/use-brand-register-modal-store";
 import { useSidebarMenuStore } from "@/stores/use-sidebar-menu-store";
 
 // サイドメニュー構成（docs/requirements/sidebar-menu.md 参照）

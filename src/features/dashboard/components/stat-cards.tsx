@@ -15,7 +15,7 @@ export function StatCards() {
 
   if (isLoading) {
     return (
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="flex flex-wrap gap-2">
         {statItems.map((item) => (
           <StatCardSkeleton key={item.key} />
         ))}
@@ -24,14 +24,14 @@ export function StatCards() {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className="flex flex-wrap gap-2">
       {statItems.map(({ label, key, suffix }) => (
-        <Card key={key}>
-          <CardHeader className="pb-2">
-            <p className="text-sm text-foreground">{label}</p>
+        <Card key={key} size="sm" className="w-fit min-w-40 shrink-0 gap-1 bg-blue-25 py-3">
+          <CardHeader className="px-4 pb-1 pt-0">
+            <p className="text-xs text-foreground">{label}</p>
           </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
+          <CardContent className="px-4 py-0">
+            <p className="text-lg font-bold">
               {data?.[key] ?? 0}
               {suffix}
             </p>

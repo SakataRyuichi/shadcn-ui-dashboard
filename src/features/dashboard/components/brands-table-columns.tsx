@@ -72,6 +72,7 @@ export const brandsTableColumns: ColumnDef<Brand>[] = [
     accessorKey: "id",
     header: "ID",
     filterFn: multiSelectFilterFn,
+    sortingFn: "alphanumeric",
     cell: ({ row }) => (
       <span className="font-mono text-muted-foreground">{row.getValue("id")}</span>
     ),
@@ -79,18 +80,21 @@ export const brandsTableColumns: ColumnDef<Brand>[] = [
   {
     accessorKey: "name",
     header: "ブランド名",
+    sortingFn: "alphanumeric",
     cell: ({ row }) => <span className="font-medium">{row.getValue("name")}</span>,
   },
   {
     accessorKey: "description",
     header: "説明",
     filterFn: multiSelectFilterFn,
+    sortingFn: "alphanumeric",
     cell: ({ row }) => <span className="text-foreground">{row.getValue("description")}</span>,
   },
   {
     accessorKey: "status",
     header: "ステータス",
     filterFn: multiSelectFilterFn,
+    sortingFn: "alphanumeric",
     cell: ({ row }) => {
       const status = row.getValue("status") as BrandStatus;
       return <BrandStatusBadge status={status} />;
@@ -100,6 +104,7 @@ export const brandsTableColumns: ColumnDef<Brand>[] = [
     accessorKey: "createdAt",
     header: "登録日",
     filterFn: dateRangeFilterFn,
+    sortingFn: "alphanumeric",
     cell: ({ row }) => <span>{row.getValue("createdAt")}</span>,
   },
 ];

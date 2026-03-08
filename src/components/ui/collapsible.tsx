@@ -9,9 +9,16 @@ function Collapsible({ ...props }: React.ComponentProps<typeof CollapsiblePrimit
 }
 
 function CollapsibleTrigger({
+  className,
   ...props
 }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>) {
-  return <CollapsiblePrimitive.CollapsibleTrigger data-slot="collapsible-trigger" {...props} />;
+  return (
+    <CollapsiblePrimitive.CollapsibleTrigger
+      data-slot="collapsible-trigger"
+      className={cn("cursor-pointer", className)}
+      {...props}
+    />
+  );
 }
 
 function CollapsibleContent({

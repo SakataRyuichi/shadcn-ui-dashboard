@@ -1,9 +1,8 @@
 "use client";
 
 import { FullScreenModalContent, FullScreenModalRoot } from "@/components/ui/full-screen-modal";
-import { useBrandRegisterModalStore } from "@/stores/use-brand-register-modal-store";
-
 import { BrandRegisterForm } from "@/features/dashboard/components/brand-register-form";
+import { useBrandRegisterModalStore } from "@/stores/use-brand-register-modal-store";
 
 /**
  * ブランド登録モーダル
